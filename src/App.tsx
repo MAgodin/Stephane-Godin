@@ -11,8 +11,10 @@ const App: React.FC = () => {
   const [activePage, setActivePage] = useState<
     "home" | "mentions" | "confidentialite"
   >("home");
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState<"leMans" | "laval">(
+    "leMans"
+  );
   const [openAccordionIndex, setOpenAccordionIndex] = useState<number | null>(
     null
   );
@@ -34,6 +36,13 @@ const App: React.FC = () => {
   const sectionVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
+  const maps = {
+    leMans:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2672.1064581101786!2d0.2027853!3d47.9897897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e288f7d83d9999%3A0x402c8d731d6c5f0!2s279%20Av.%20F%C3%A9lix%20Geneslay%2C%2072100%20Le%20Mans!5e0!3m2!1sfr!2sfr!4v1709911444179!5m2!1sfr!2sfr",
+    laval:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2665.9643997021158!2d-0.771895123058652!3d48.072330071236316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4808fdf14e59786d%3A0x172a94c5d007c6eb!2s26%20Rue%20Jules%20Ferry%2C%2053000%20Laval!5e0!3m2!1sfr!2sfr!4v1739705980639!5m2!1sfr!2sfr",
   };
 
   const accordionItems = [
@@ -257,17 +266,18 @@ const App: React.FC = () => {
       ),
     },
     {
-      title: "Formation",
+      title: "Formations",
       content: (
         <div className="space-y-4 text-gray-700">
           <p>Mes formations incluent :</p>
           <ul className="list-disc list-inside space-y-2 pl-4">
-            <li>Formé par HEXAFOR à l’EMDR.</li>
-            <li>Formé par l’institut Double Hélice à l’ICV.</li>
-            <li>Formé à la TIFT par le Dr. Janner Steffan.</li>
-            <li>Formé à l’IR (Intelligence Relationnelle) par SelfThérapie.</li>
             <li>
-              Formé par l’institut de formation Psynapse. Retrouvez-moi dans{" "}
+              Formé à l'ICV (Intégration du Cycle de Vie) par l’institut Double
+              Hélice.
+            </li>
+            <li>
+              Formé à l'hypnose par l’institut de formation Psynapse.
+              Retrouvez-moi dans{" "}
               <a
                 href="https://psynapse.fr/annuaire-therapeutes/?process=true&praticien=godin&lieu=Le%20Mans,%20France&discipline="
                 target="_blank"
@@ -278,6 +288,14 @@ const App: React.FC = () => {
               </a>
               .
             </li>
+            <li>DU de neuropsychologie à l'université de Caen.</li>
+          </ul>
+
+          <p>Autres formations suivies :</p>
+          <ul className="list-disc list-inside space-y-2 pl-4">
+            <li>EMDR / HEXAFOR.</li>
+            <li>TIFT / Mme Janner Steffan.</li>
+            <li>IR (Intelligence Relationnelle) / SelfThérapie.</li>
           </ul>
         </div>
       ),
@@ -329,10 +347,10 @@ const App: React.FC = () => {
                 Contact
               </a>
               <a
-                href="tel:0612345678"
+                href="tel:0632145942"
                 className="bg-[#9A889D] text-white px-4 py-2 rounded hover:bg-[#7A687D] transition duration-300"
               >
-                06 12 34 56 78
+                06 32 14 59 42
               </a>
             </div>
             {/* Bouton du menu mobile */}
@@ -382,7 +400,7 @@ const App: React.FC = () => {
                 if (seancesElement) {
                   seancesElement.scrollIntoView({ behavior: "smooth" });
                 }
-                setIsMenuOpen(false); // Ferme le menu après le clic
+                setIsMenuOpen(false);
               }}
               className="block py-2 text-gray-800 hover:text-[#9A889D] transition duration-300"
             >
@@ -396,7 +414,7 @@ const App: React.FC = () => {
                 if (contactElement) {
                   contactElement.scrollIntoView({ behavior: "smooth" });
                 }
-                setIsMenuOpen(false); // Ferme le menu après le clic
+                setIsMenuOpen(false);
               }}
               className="block py-2 text-gray-800 hover:text-[#9A889D] transition duration-300"
             >
@@ -410,26 +428,34 @@ const App: React.FC = () => {
         <>
           {/* Hero Section */}
           <section
-            className="pt-48 pb-32 bg-cover bg-center relative" // Augmentez pt-32 à pt-48 et pb-20 à pb-32
+            className="pt-48 pb-32 relative min-h-screen text-center"
             style={{
               backgroundImage: `url(${homePicture})`,
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              height: "100vh",
             }}
           >
             {/* Overlay sombre pour améliorer la lisibilité du texte */}
             <div className="absolute inset-0 bg-[#9A889D] bg-opacity-30"></div>
 
-            <div className="max-w-6xl mx-auto px-4 relative z-10">
+            <div className="max-w-6xl mx-auto px-4 relative z-10 flex flex-col justify-center items-center h-full">
               <div className="max-w-3xl">
-                <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                {/* Titre plus grand et centré */}
+                <h1 className="text-6xl md:text-7xl font-bold text-white mb-6">
                   Psychologue
                   <br />
-                  Hypnothérapeute
+                  <span className="text-4xl md:text-5xl">Hypnothérapeute</span>
                   <br />
-                  sur Le Mans
+                  <span className="text-2xl md:text-3xl">LAVAL / LE MANS</span>
                 </h1>
+
+                {/* Description */}
                 <p className="text-lg text-white mb-8">
-                  → Psychologue expert judiciaire
+                  Psychologue expert judiciaire
                 </p>
+                {/* Bouton centré et plus visible */}
                 <a
                   href="#contact"
                   onClick={(e) => {
@@ -458,7 +484,7 @@ const App: React.FC = () => {
           >
             <div className="max-w-6xl mx-auto px-4">
               <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-                Les prises en charge que je vous propose
+                La prise en charge :
               </h2>
               <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto">
                 <h3 className="text-2xl font-bold mb-6">
@@ -521,13 +547,13 @@ const App: React.FC = () => {
                   ✓ En ce qui concerne le suivi psychologique, il faut en
                   moyenne de 6 à 12 mois de suivi à raison d'une fois par
                   semaine / deux fois par mois pour traiter une difficulté mais
-                  les cours peuvent être plus longs.
+                  les traitements peuvent être plus longs.
                 </p>
                 <p className="transition-all duration-300 hover:bg-[#E8D5EB] hover:px-4 hover:py-2 hover:rounded-lg">
-                  ✓ Le prix d'une séance est de 54€. Des arrangements tarifaires
+                  ✓ Le prix d'une séance est de 55€. Des arrangements tarifaires
                   sont possibles, sur demande et selon la situation, sur
                   présentation de pièces justificatives. Les séances accueillant
-                  des couples coûtent 85€ et durent une heure.
+                  des couples coûtent 90€ et durent une heure.
                 </p>
                 <p className="transition-all duration-300 hover:bg-[#E8D5EB] hover:px-4 hover:py-2 hover:rounded-lg">
                   ✓ Durée d'une séance : 45 minutes maximum (une heure pour les
@@ -549,6 +575,7 @@ const App: React.FC = () => {
               <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
                 Prise de rendez-vous
               </h2>
+
               <div className="max-w-4xl mx-auto text-center mb-12">
                 <p className="text-gray-700 mb-4">
                   Pour prendre rendez-vous il suffit de me contacter par SMS,
@@ -580,9 +607,23 @@ const App: React.FC = () => {
                       pour les horaires d’ouverture des deux lieux).
                     </p>
                   </div>
+                  <div className="flex justify-center space-x-4 mb-6">
+                    <button
+                      onClick={() => setSelectedAddress("leMans")}
+                      className="px-4 py-2 bg-[#9A889D] text-white rounded hover:bg-[#7A687D] transition duration-300"
+                    >
+                      Carte du Mans
+                    </button>
+                    <button
+                      onClick={() => setSelectedAddress("laval")}
+                      className="px-4 py-2 bg-[#9A889D] text-white rounded hover:bg-[#7A687D] transition duration-300"
+                    >
+                      Carte de Laval
+                    </button>
+                  </div>
                   <div className="aspect-w-16 aspect-h-9">
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2672.1064581101786!2d0.2027853!3d47.9897897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e288f7d83d9999%3A0x402c8d731d6c5f0!2s279%20Av.%20F%C3%A9lix%20Geneslay%2C%2072100%20Le%20Mans!5e0!3m2!1sfr!2sfr!4v1709911444179!5m2!1sfr!2sfr"
+                      src={maps[selectedAddress]}
                       className="w-full h-[300px] border-0 rounded-lg"
                       loading="lazy"
                       title="Carte Google Maps"

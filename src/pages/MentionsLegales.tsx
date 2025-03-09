@@ -25,7 +25,7 @@ const MentionsLegales: React.FC<MentionsLegalesProps> = ({ setActivePage }) => {
           <br />
           Psychologue et Hypnothérapeute
           <br />
-          279 Avenue Félix Geneslay, 72100 Le Mans
+          26 rue Jules Ferry, 53000 Laval.
           <br />
           Téléphone :{" "}
           <a
@@ -47,28 +47,29 @@ const MentionsLegales: React.FC<MentionsLegalesProps> = ({ setActivePage }) => {
         <h2 className="text-2xl font-bold mt-6 mb-4">Hébergeur du site</h2>
         <p>
           Ce site est hébergé par :<br />
-          <strong>Nom de l'hébergeur</strong>
+          <strong>HOSTINGER operations, UAB</strong>
           <br />
-          Adresse de l'hébergeur
+          Švitrigailos str. 34, Vilnius 03230 Lithuania
           <br />
           Téléphone :{" "}
           <a href="tel:" className="text-[#9A889D] hover:text-[#7A687D]">
-            XX.XX.XX.XX.XX
+            +37 0 64 50 33 78
           </a>
           <br />
           Site web :{" "}
           <a
-            href="https://www.nom-hebergeur.com"
+            href="https://www.hostinger.com"
             className="text-[#9A889D] hover:text-[#7A687D]"
+            target="_blank"
           >
-            www.nom-hebergeur.com
+            https://www.hostinger.com
           </a>
         </p>
 
         <h2 className="text-2xl font-bold mt-6 mb-4">Activité</h2>
         <p>
           Stéphane Godin est un psychologue et hypnothérapeute indépendant,
-          exerçant sous le numéro SIRET : <strong>XXX XXX XXX XXXXX</strong>.
+          exerçant sous le numéro SIRET : <strong>499 892 743 00042</strong>.
           <br />
           Le site a pour but de présenter les services proposés et de permettre
           aux visiteurs de prendre rendez-vous.
